@@ -35,28 +35,16 @@ DOCTOLIB_API_PARAMS = {
     "limit" : "15"
 }
 
-params = urllib.parse.urlencode(DOCTOLIB_API_PARAMS).encode('ascii')
-current_day = date.today().strftime('%Y-%m-%d')
-url = DOCTOLIB_API_URL + DOCTOLIB_API_PATH + current_day + "?"
+def call_doctolib_api(from_date, params):
+	url_parameters = urllib.parse.urlencode(params)
+	from_date_str = from_date.strftime('%Y-%m-%d')
+	url = DOCTOLIB_API_URL + DOCTOLIB_API_PATH + from_date_str + "?" + url_parameters
+	html = urllib.request.urlopen(url).read()
+	return html
 
-fullURL = "%s%s" % (url, params.decode('ascii'))
-# print(fullURL)
-
-html = urllib.request.urlopen(fullURL).read()
-
-# req = urllib.request.Request(url = url, data=params)
-# with urllib.request.urlopen(req) as response:
-# 	print(response.status, response.reason)
-# 	data = response.read().decode('utf-8')
-# 	print(data)
-
-# with urllib.request.urlopen(url, params) as response :
-# 	print(response.status, response.reason)
-# 	data = response.read().decode('utf-8')
-# 	print(data)
+html = call_doctolib_api(date.today(), DOCTOLIB_API_PARAMS)
 
 soup = BeautifulSoup(html)
-# print(soup.prettify())
 
 slots = soup('div', {'class' : 'slots'})[0]
 print(slots.prettify())
