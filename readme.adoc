@@ -1,0 +1,19 @@
+= Doctolib API call
+
+This repo contains some scripts to call doctolib API. I use it to know when my doctor will be availlable as soon as possible.
+
+Note : the bash version use a loop to call doctolib api each 5 minutes and notify-send to show a notification when an timetable was found.
+
+
+== Exemple of usage :
+
+=== Python version
+
+- Fill array in the begenning of the script with your doctor
+- update variable DOCTOLIB_API_PATH with your ID
+- launch script :
+
+[source,bash]
+----
+$> ./checkOphtalmoDispo.py
+----
