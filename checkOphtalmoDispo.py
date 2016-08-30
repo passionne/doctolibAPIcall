@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
 
+# Note : urllib use proxy via env vars HTTP_PROXY rather than http_proxy ...
+
 from urllib.request import urlopen
 from urllib.parse import urlencode, urlparse, unquote_plus
 from bs4 import BeautifulSoup
